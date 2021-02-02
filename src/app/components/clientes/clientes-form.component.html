@@ -1,0 +1,41 @@
+<div class="col-md-5">
+    <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+        <li *ngFor="let error of errores">
+            {{error}}
+        </li>
+    </ul>
+    <button mat-flat-button color="primary" class="mb-3" [routerLink]="['/clientes']">
+        <mat-icon>home</mat-icon>
+    </button>
+    <form>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="cliente.nombre">
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="cliente.apellido">
+        </div>
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente.direccion">
+        </div>
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="cliente.telefono">
+        </div>
+        <div class="form-group">
+            <label for="correoElectronico">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correoElectronico" name="correoElectronico"
+                [(ngModel)]="cliente.correoElectronico">
+        </div>
+    </form>
+    <button mat-flat-button color="accent" (click)='crear()' *ngIf="!cliente.id else update">
+        <mat-icon>check</mat-icon>
+    </button>
+    <ng-template #update>
+        <button mat-flat-button color="accent" (click)='actualizar()'>
+            <mat-icon>edit</mat-icon>
+        </button>
+    </ng-template>
+</div>

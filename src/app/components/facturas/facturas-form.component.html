@@ -1,0 +1,25 @@
+<div class="col-md-5">
+    <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+        <li *ngFor="let error of errores">
+            {{error}}
+        </li>
+    </ul>
+    <button mat-flat-button color="primary" class="mb-3" [routerLink]="['/facturas']">
+        <mat-icon>home</mat-icon>
+    </button>
+    <form>
+        <div class="form-group">
+            <label for="fechaEmision">Fecha Emisión</label>
+            <input type="text" class="form-control" id="fechaEmision" name="fechaEmision"
+                [(ngModel)]="factura.fechaEmision">
+        </div>
+    </form>
+    <button mat-flat-button color="accent" (click)='crear()' *ngIf="!factura.id else update">
+        <mat-icon>check</mat-icon>
+    </button>
+    <ng-template #update>
+        <button mat-flat-button color="accent" (click)='actualizar()'>
+            <mat-icon>edit</mat-icon>
+        </button>
+    </ng-template>
+</div>
