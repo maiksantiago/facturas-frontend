@@ -1,8 +1,8 @@
 # Sistema de Facturas con Angular
 
-## Pre-requisitos
+### Pre-requisitos
 
-- Node.js
+- [Node.js](https://nodejs.org/es/)
 
 ### Instalación
 
