@@ -20,7 +20,6 @@ export class FacturasFormComponent implements OnInit {
 
   public productos: Producto[] = [];
   public productosFiltrados: Producto[] = [];
-  public columnasMostradasItem: string[] = ['nombre', 'precio', 'stock', 'cantidad'];
 
   constructor(private facturaService: FacturaService,
     private clienteService: ClienteService,
@@ -66,11 +65,14 @@ export class FacturasFormComponent implements OnInit {
   seleccionProducto(seleccion: MatListOption[]): void {
     seleccion.map(seleccion => {
       let producto = seleccion.value;
-      console.log(producto);
       let item = new Item();
       item.producto = producto;
       this.factura.items.push(item);
     });
+  }
+
+  eliminarItem(id: number): void {
+    this.factura.items = this.factura.items.filter((item: Item) => id != item.producto.id);
   }
 
 }
