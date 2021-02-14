@@ -9,7 +9,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 })
 export class ClientesComponent implements OnInit {
 
-  public columnasMostradas: string[] = ['id', 'nombre', 'apellido', 'direccion', 'telefono', 'correoElectronico', 'actualizar', 'eliminar'];
+  public columnasMostradas: string[] = ['id', 'nombre', 'apellido', 'direccion', 'telefono', 'correoElectronico', 'crearFactura', 'actualizar', 'eliminar'];
   public clientes: Cliente[] = [];
   public cliente: Cliente = new Cliente();
 

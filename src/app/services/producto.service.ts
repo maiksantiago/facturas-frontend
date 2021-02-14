@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Producto } from '../models/producto';
 import { CommonService } from './common.service';
 
@@ -12,6 +13,10 @@ export class ProductoService extends CommonService<Producto> {
 
   constructor(httpClient: HttpClient) {
     super(httpClient);
+  }
+
+  public filtrarPorNombre(nombre: string): Observable<Producto[]> {
+    return this.httpClient.get<Producto[]>(`${this.endpoint}/filtrar/${nombre}`);
   }
 
 }

@@ -5,18 +5,15 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { ClientesFormComponent } from './components/clientes/clientes-form.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { FacturasFormComponent } from './components/facturas/facturas-form.component';
-import { FacturasComponent } from './components/facturas/facturas.component';
 import { ProductosFormComponent } from './components/productos/productos-form.component';
 import { ProductosComponent } from './components/productos/productos.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'facturas' },
+  { path: '', pathMatch: 'full', redirectTo: 'clientes' },
   { path: 'clientes', component: ClientesComponent },
   { path: 'clientes/form', component: ClientesFormComponent },
   { path: 'clientes/form/:id', component: ClientesFormComponent },
-  { path: 'facturas', component: FacturasComponent },
-  { path: 'facturas/form', component: FacturasFormComponent },
-  { path: 'facturas/form/:id', component: FacturasFormComponent },
+  { path: 'facturas/form/:idCliente', component: FacturasFormComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'productos/form', component: ProductosFormComponent },
   { path: 'productos/form/:id', component: ProductosFormComponent },
