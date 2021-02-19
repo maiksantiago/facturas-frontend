@@ -46,14 +46,14 @@ export class FacturasFormComponent implements OnInit {
     });
   }
 
-  filtrarProductoPorNombre(nombre: string): void {
+  public filtrarProductoPorNombre(nombre: string): void {
     nombre = nombre !== undefined ? nombre.trim() : '';
     if (nombre !== '') {
       this.productoService.filtrarPorNombre(nombre)
-        .subscribe(productos => this.productosFiltrados = productos.filter(p => {
+        .subscribe(productos => this.productosFiltrados = productos.filter(pf => {
           let filtrar = true;
-          this.productos.forEach(n => {
-            if (p.id === n.id) {
+          this.productos.forEach(p => {
+            if (pf.id === p.id) {
               filtrar = false;
             }
           });
@@ -62,17 +62,53 @@ export class FacturasFormComponent implements OnInit {
     }
   }
 
-  seleccionProducto(seleccion: MatListOption[]): void {
+  public seleccionProducto(seleccion: MatListOption[]): void {
     seleccion.map(seleccion => {
-      let producto = seleccion.value;
-      let item = new Item();
-      item.producto = producto;
-      this.factura.items.push(item);
+      let producto = seleccion.value as Producto;
+      if (this.existeItem(producto.id)) {
+        this.incrementarCantidad(producto.id);
+      } else {
+        let item = new Item();
+        item.producto = producto;
+        this.factura.items.push(item);
+      }
     });
   }
 
-  eliminarItem(id: number): void {
-    this.factura.items = this.factura.items.filter((item: Item) => id != item.producto.id);
+  public existeItem(id: number): boolean {
+    let existe = false;
+    this.factura.items.forEach(item => {
+      if (id === item.producto.id) {
+        existe = true;
+      }
+    });
+    return existe;
+  }
+
+  public incrementarCantidad(id: number): void {
+    this.factura.items = this.factura.items.map(item => {
+      if (id === item.producto.id && item.cantidad < item.producto.stock) {
+        ++item.cantidad;
+      }
+      return item;
+    });
+  }
+
+  public actualizarCantidad(id: number, event: any): void {
+    let cantidad: number = event.target.value as number;
+    if (cantidad == 0) {
+      return this.eliminarItem(id);
+    }
+    this.factura.items = this.factura.items.map(item => {
+      if (id === item.producto.id) {
+        item.cantidad = cantidad;
+      }
+      return item;
+    });
+  }
+
+  public eliminarItem(id: number): void {
+    this.factura.items = this.factura.items.filter(item => id != item.producto.id);
   }
 
 }

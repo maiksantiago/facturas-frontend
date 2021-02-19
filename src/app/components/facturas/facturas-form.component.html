@@ -49,9 +49,10 @@
                                 <td>{{item.producto.stock}}</td>
                                 <td>
                                     <input type="number" class="form-control form-control-sm" id="cantidad"
-                                        name="cantidad" [(ngModel)]="item.cantidad" style="width: 25%;">
+                                        name="cantidad" min="1" max="{{item.producto.stock}}" value="{{item.cantidad}}"
+                                        (change)="actualizarCantidad(item.producto.id, $event)">
                                 </td>
-                                <td>$0.0</td>
+                                <td>${{item.calcularPrecioTotal()}}</td>
                                 <td>
                                     <button mat-mini-fab color="warn" (click)='eliminarItem(item.producto.id)'>
                                         <mat-icon>delete</mat-icon>
@@ -60,7 +61,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="h5 mt-3">Total: $0.0</p>
+                    <p class="h5 mt-3" *ngIf="factura.items.length > 0">Total: ${{factura.calcularTotal()}}</p>
                 </div>
             </div>
         </div>

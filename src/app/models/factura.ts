@@ -7,4 +7,12 @@ export class Factura implements Common {
     fechaEmision: string;
     cliente: Cliente;
     items: Item[] = [];
+
+    public calcularTotal(): number {
+        let total = 0;
+        this.items.forEach(item => {
+            total += item.calcularPrecioTotal();
+        });
+        return total;
+    }
 }
