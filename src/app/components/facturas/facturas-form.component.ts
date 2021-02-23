@@ -73,6 +73,7 @@ export class FacturasFormComponent implements OnInit {
         this.factura.items.push(item);
       }
     });
+    this.productosFiltrados = [];
   }
 
   public existeItem(id: number): boolean {

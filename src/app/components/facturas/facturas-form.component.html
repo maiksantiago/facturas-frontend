@@ -23,9 +23,10 @@
             <div class="card">
                 <div class="card-body">
                     <input type="text" class="form-control mb-3" placeholder="Búscar Producto..."
-                        (keyup)="filtrarProductoPorNombre($event.target.value)" style="width: 55%;">
+                        (keyup)="filtrarProductoPorNombre($event.target.value)" #bp style="width: 55%;">
                     <mat-selection-list #productos [multiple]="false"
-                        (selectionChange)="seleccionProducto(productos.selectedOptions.selected)" style="width: 55%;">
+                        (selectionChange)="seleccionProducto(productos.selectedOptions.selected)"
+                        (click)="bp.value = ''" style="width: 55%;">
                         <mat-list-option *ngFor="let producto of productosFiltrados" [value]="producto">
                             {{producto.nombre}}
                         </mat-list-option>
